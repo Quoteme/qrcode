@@ -2,6 +2,7 @@
 
 ### What is a base?
 A base is a small PNG, consisting of three different types of pixels
+
 | Black Pixel		| denotes a black pixel on the QR-Code for error checking	|
 | White Pixel		| denotes a white pixel on the QR-Code for error checking	|
 | Transparent Pixel	| denotes an empty space, where information can be stored	|
