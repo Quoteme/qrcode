@@ -20,7 +20,7 @@
   <icon src="icon.png" />
 
   <gap:plugin name="cordova-plugin-camera" source="npm" />
-  <gap:plugin name="org.apache.cordova.media-capture" source="npm" />
+  <gap:plugin name="cordova-plugin-media-capture" source="npm" />
   <gap:plugin name="cordova-plugin-geolocation" source="npm" />
   <feature name="http://api.phonegap.com/1.0/camera" />
 </widget>
