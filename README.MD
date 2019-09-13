@@ -28,8 +28,11 @@ after importing the code into your project, call this function:
 ```
 encode( base, binary, freeColor )
 ```
+
 ```base``` is the base (as an ```Image``` object)
+
 ```binary``` is a string of '100101...' (zeros will become white, ones will become black)
+
 optional ```freeColor``` is an array [r,g,b,a] which denotes the color of pixels which are free to put data into (on the base)
 
 #### How do I read a QR-Code?
@@ -39,6 +42,9 @@ decode( base, img, threshold )
 .catch( e => {})
 .then( e => functionYouWantToApplyToReadString(e) )
 ```
+
 ```base``` is the base (as an ```Image``` object)
+
 ```img``` is the image that should be analyzed (make sure the image is cut before, so that it only portraits the QR-Code, which is not rotated and not tilted)
+
 optional ```threshold``` is a floating point value between 0 and 1. It determines how dark a section of the image must be, in order to be considered a black or white pixel (0 -> all pixels are white, except the ones that are 100% black, 1 -> all pixels are black, except the ones which are 100% white)
