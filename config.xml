@@ -19,4 +19,6 @@
 
   <icon src="icon.png" />
 
+  <plugin name="cordova-plugin-camera-preview" />
+  <plugin name="cordova-plugin-compat" />
 </widget>
