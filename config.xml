@@ -13,11 +13,14 @@
 	A QR-Code implementation that can create, parse and read custom qr-codes with their own encryption. App included that can parse QR-Codes in real time
   </description>
 
-  <author href="https://github.com/Quoteme/complexGrapher" email="">
+  <author href="https://github.com/Quoteme/qrcode" email="">
       Luca Leon Happel
   </author>
 
   <icon src="icon.png" />
 
   <gap:plugin name="cordova-plugin-camera" source="npm" />
+  <gap:plugin name="org.apache.cordova.media-capture" source="npm" />
+  <gap:plugin name="cordova-plugin-geolocation" source="npm" />
+  <feature name="http://api.phonegap.com/1.0/camera" />
 </widget>
