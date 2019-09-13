@@ -19,5 +19,7 @@
 
   <icon src="icon.png" />
 
-  <plugin name="cordova-plugin-camera-preview" />
+  <gap:config-file platform="android" parent="/manifest" mode="add">
+    <uses-permission android:name="android.permission.CAMERA" />
+  </gap:config-file>
 </widget>
