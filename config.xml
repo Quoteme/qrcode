@@ -19,5 +19,5 @@
 
   <icon src="icon.png" />
 
-  <plugin name="cordova-plugin-camera" source="npm" spec="4.1.0" />
+  <feature name="http://api.phonegap.com/1.0/camera"/>
 </widget>
