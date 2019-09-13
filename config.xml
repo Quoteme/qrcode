@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.phonegap.qrcode"
+    versionCode = "10"
+    version     = "1.0.0" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>QR-Code</name>
+
+  <description>
+	A QR-Code implementation that can create, parse and read custom qr-codes with their own encryption. App included that can parse QR-Codes in real time
+  </description>
+
+  <author href="https://github.com/Quoteme/complexGrapher" email="">
+      Luca Leon Happel
+  </author>
+
+  <icon src="icon.png" />
+
+</widget>
