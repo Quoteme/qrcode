@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<style type="text/css" media="screen">
+			body{
+				background: #000;
+				font-family: monospace;
+				zoom: 2.5;
+			}
+			img {
+				width: 70px;
+				image-rendering: pixelated;
+				margin: 5px;
+				background: #efefef;
+				border: 3px solid #d66
+			}
+			div{
+				float: left;
+			}
+			#encode, #decode, #basesChoice{
+				margin: 3px;
+				background: #161616;
+				color: #ccc;
+				width: 100%;
+			}
+			#video{
+				display : none
+			}
+			h1, h2, h3{
+				background: #161616;
+				color: #fff;
+				text-align: center;
+			}
+			#output{
+				background: #fff;
+				color: #000;
+				border: 2px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='basesChoice'>
+			<h1>BASES</h1>
+			<img src="res/base/16x16_dotted.png" class='decodeBase'/>
+			<img src="res/base/32x32_cross.png" class='decodeBase'/>
+		</div>
+		<div id="decode">
+			<h1>DECODE</h1>
+			<table>
+				<tr>
+					<td>
+						<input type="text" value="" id="decodeBaseURL"/>
+					</td>
+					<td>BASE URL</td>
+				</tr>
+				<tr>
+					<td><canvas id="processingCanvas"></canvas></td>
+					<td>VIDEO</td>
+				</tr>
+				<tr>
+					<td><input type="range" id="zoomInput" onchange="zoom = this.value" value="1" min="1" max="5" step="0.1"></td>
+					<td>ZOOM</td>
+				</tr>
+				<tr>
+					<td><span id="output">Output will be here...</span></td>
+					<td>OUTPUT</td>
+				</tr>
+			</table>
+			<video id="video" height="300" width="300" autoplay</video>
+		</div>
+		<div id="encode">
+			<h1>ENCODE</h1>
+			<div>
+				<h2>Input</h2>
+				<table>
+					<tr>
+						<td>Base:</td>
+						<td><input type="text" id="base" value="res/base/16x16_dotted.png"></td>
+					</tr>
+					<tr>
+						<td>Text</td>
+						<td><input type="text" value="" id="text"/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><button onclick="generate()">GENERATE</button></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<h2>Output</h2>
+				<div id="out"></div>
+			</div>
+		</div>
+		<script src="js/qrcode.js" charset="utf-8"></script>
+		<script charset="utf-8">
+			const generate = () => {
+				let text = document.getElementById("text").value;
+				let base = new Image();
+					base.onload = () => document.getElementById("out")
+						.appendChild(
+							encode(base,textBinary(text))
+						);
+					base.src = document.getElementById("base").value;
+			}
+
+			let video		= document.getElementById('video');
+			let pc			= document.getElementById('processingCanvas')
+			let pctx		= pc.getContext('2d');
+			let zoom		= 1;
+			let decodeBase	= new Image();
+			let decodeImg	= new Image();
+			let decodeCanvas= document.createElement('canvas');
+			let dctx		= decodeCanvas.getContext('2d');
+			let output 		= document.getElementById('output');
+			// set up camera input
+			if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+				navigator.mediaDevices.getUserMedia({video: {
+					width: 500,
+					height: 500,
+					facingMode: {exact: 'environment'},
+					//frameRate: {ideal: 10}
+				}}).then( (stream) => {
+					video.srcObject = stream;
+					video.play();
+				})
+			// draw the camera input and decode it
+			video.addEventListener('play', ()=>{
+				pc.width = video.width;
+				pc.height = video.height;
+				decodeCanvas.width = pc.width/2;
+				decodeCanvas.height = pc.height/2;
+				const update = ()=>{
+					// draw the video
+						pctx.drawImage(video, -(zoom-1)/2*pc.width,-(zoom-1)/2*pc.height,zoom*pc.width,zoom*pc.height);
+					// decode the image
+						dctx.putImageData( pctx.getImageData(pc.width/4, pc.height/4, pc.width/2, pc.height/2), 0,0);
+						decodeImg.onload = () =>{
+							decode( decodeBase, decodeImg, 0.7 )
+								.catch( e =>{} )
+								.then( e =>{
+									if(e!=undefined)
+										output.innerText = e;
+								})
+							requestAnimationFrame(update);
+						}
+						decodeImg.src = decodeCanvas.toDataURL("image/png");
+					// draw the detectioon n box
+						pctx.globalCompositeOperation='difference';
+						pctx.strokeStyle = '#ffffff';
+						pctx.lineWidth = 5;
+						pctx.strokeRect(pc.width/4, pc.height/4, pc.width/2, pc.height/2);
+						pctx.globalCompositeOperation='source-over';
+				}
+				update();
+			})
+			// allow for change of decode base by clicking on an image with classname 'decodeBase'
+			document.getElementById('decodeBaseURL').onchange = () => decodeBase.src = document.getElementById('decodeBaseURL').value;
+			Array.from( document.getElementsByClassName('decodeBase') ).forEach( e => {
+				e.addEventListener('click', ()=>{
+					document.getElementById('decodeBaseURL').value = e.src;
+					document.getElementById('base').value = e.src;
+					document.getElementById('decodeBaseURL').onchange();
+				})
+			})
+			document.getElementById('decodeBaseURL').value = Array.from( document.getElementsByClassName('decodeBase') )[0].src;
+			document.getElementById('decodeBaseURL').onchange();
+		</script>
+	</body>
+</html>
