@@ -167,6 +167,13 @@
 			})
 			document.getElementById('decodeBaseURL').value = Array.from( document.getElementsByClassName('decodeBase') )[0].src;
 			document.getElementById('decodeBaseURL').onchange();
+
+
+			// Phonegap stuff
+			document.addEventListener("deviceready", onDeviceReady, false);
+			function onDeviceReady() {
+				console.log(navigator.camera);
+			}
 		</script>
 	</body>
 </html>
