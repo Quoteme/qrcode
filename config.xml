@@ -18,5 +18,6 @@
   </author>
 
   <icon src="icon.png" />
-  <plugin name="cordova-plugin-camera" spec="~4.1.0" />
+
+  <gap:plugin name="cordova-plugin-camera" source="npm" />
 </widget>
