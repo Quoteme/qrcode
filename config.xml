@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
-	xmlns:android="http://schemas.android.com/apk/res/android"
     id          = "com.phonegap.qrcode"
     versionCode = "10"
     version     = "1.0.0" >
@@ -21,12 +20,4 @@
   <icon src="icon.png" />
 
   <feature name="http://api.phonegap.com/1.0/camera"/>
-  <platform name="android">
-    <config-file parent="/*" target="AndroidManifest.xml">
-      <uses-permission android:name="android.permission.RECEIVE_SMS" />
-      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-      <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    </config-file>
-  </platform>
-
 </widget>
