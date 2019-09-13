@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
-	xmlns:android="http://schemas.android.com/apk/res/android"
     id          = "com.phonegap.qrcode"
-    versionCode = "10"
     version     = "1.0.0" >
 
+<!-- xmlns:android   = "http://schemas.android.com/apk/res/android" -->
 <!-- versionCode is optional and Android only -->
 
   <name>QR-Code</name>
@@ -20,13 +19,5 @@
 
   <icon src="icon.png" />
 
-  <feature name="http://api.phonegap.com/1.0/camera"/>
-  <platform name="android">
-    <config-file parent="/*" target="AndroidManifest.xml">
-      <uses-feature android:name="android.hardware.camera" />
-      <uses-feature android:name="android.hardware.camera.autofocus" />
-      <uses-permission android:name="android.permission.CAMERA" />
-    </config-file>
-  </platform>
-
+  <gap:plugin name="cordova-plugin-camera" source="npm" />
 </widget>
