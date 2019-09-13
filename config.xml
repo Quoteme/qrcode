@@ -19,7 +19,5 @@
 
   <icon src="icon.png" />
 
-  <gap:config-file platform="android" parent="/manifest" mode="add">
-    <uses-permission android:name="android.permission.CAMERA" />
-  </gap:config-file>
+  <uses-permission android:name="android.permission.CAMERA" />
 </widget>
