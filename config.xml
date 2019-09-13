@@ -19,5 +19,5 @@
 
   <icon src="icon.png" />
 
-  <gap:plugin name="org.apache.cordova.camera" version="4.1.0" />
+  <gap:plugin name="org.apache.cordova.camera"/>
 </widget>
