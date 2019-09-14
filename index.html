@@ -116,62 +116,62 @@
 			let decodeCanvas= document.createElement('canvas');
 			let dctx		= decodeCanvas.getContext('2d');
 			let output 		= document.getElementById('output');
-			const init = () =>
-				alert('starting');
-				// set up camera input
-				if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
-					navigator.mediaDevices.getUserMedia({video: {
-						width: 500,
-						height: 500,
-						facingMode: {exact: 'environment'},
-						//frameRate: {ideal: 10}
-					}}).then( (stream) => {
-						video.srcObject = stream;
-						video.play();
-					})
-				// draw the camera input and decode it
-				video.addEventListener('play', ()=>{
-					pc.width = video.width;
-					pc.height = video.height;
-					decodeCanvas.width = pc.width/2;
-					decodeCanvas.height = pc.height/2;
-					const update = ()=>{
-						// draw the video
-							pctx.drawImage(video, -(zoom-1)/2*pc.width,-(zoom-1)/2*pc.height,zoom*pc.width,zoom*pc.height);
-						// decode the image
-							dctx.putImageData( pctx.getImageData(pc.width/4, pc.height/4, pc.width/2, pc.height/2), 0,0);
-							decodeImg.onload = () =>{
-								decode( decodeBase, decodeImg, 0.7 )
-									.catch( e =>{} )
-									.then( e =>{
-										if(e!=undefined)
-											output.innerText = e;
-									})
-								requestAnimationFrame(update);
-							}
-							decodeImg.src = decodeCanvas.toDataURL("image/png");
-						// draw the detectioon n box
-							pctx.globalCompositeOperation='difference';
-							pctx.strokeStyle = '#ffffff';
-							pctx.lineWidth = 5;
-							pctx.strokeRect(pc.width/4, pc.height/4, pc.width/2, pc.height/2);
-							pctx.globalCompositeOperation='source-over';
-					}
-					update();
+			// set up camera input
+			if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+				navigator.mediaDevices.getUserMedia({video: {
+					width: 500,
+					height: 500,
+					facingMode: {exact: 'environment'},
+					//frameRate: {ideal: 10}
+				}}).then( (stream) => {
+					video.srcObject = stream;
+					video.play();
 				})
-				// allow for change of decode base by clicking on an image with classname 'decodeBase'
-				document.getElementById('decodeBaseURL').onchange = () => decodeBase.src = document.getElementById('decodeBaseURL').value;
-				Array.from( document.getElementsByClassName('decodeBase') ).forEach( e => {
-					e.addEventListener('click', ()=>{
-						document.getElementById('decodeBaseURL').value = e.src;
-						document.getElementById('base').value = e.src;
-						document.getElementById('decodeBaseURL').onchange();
-					})
+			// draw the camera input and decode it
+			video.addEventListener('play', ()=>{
+				pc.width = video.width;
+				pc.height = video.height;
+				decodeCanvas.width = pc.width/2;
+				decodeCanvas.height = pc.height/2;
+				const update = ()=>{
+					// draw the video
+						pctx.drawImage(video, -(zoom-1)/2*pc.width,-(zoom-1)/2*pc.height,zoom*pc.width,zoom*pc.height);
+					// decode the image
+						dctx.putImageData( pctx.getImageData(pc.width/4, pc.height/4, pc.width/2, pc.height/2), 0,0);
+						decodeImg.onload = () =>{
+							decode( decodeBase, decodeImg, 0.7 )
+								.catch( e =>{} )
+								.then( e =>{
+									if(e!=undefined)
+										output.innerText = e;
+								})
+							requestAnimationFrame(update);
+						}
+						decodeImg.src = decodeCanvas.toDataURL("image/png");
+					// draw the detectioon n box
+						pctx.globalCompositeOperation='difference';
+						pctx.strokeStyle = '#ffffff';
+						pctx.lineWidth = 5;
+						pctx.strokeRect(pc.width/4, pc.height/4, pc.width/2, pc.height/2);
+						pctx.globalCompositeOperation='source-over';
+				}
+				update();
+			})
+			// allow for change of decode base by clicking on an image with classname 'decodeBase'
+			document.getElementById('decodeBaseURL').onchange = () => decodeBase.src = document.getElementById('decodeBaseURL').value;
+			Array.from( document.getElementsByClassName('decodeBase') ).forEach( e => {
+				e.addEventListener('click', ()=>{
+					document.getElementById('decodeBaseURL').value = e.src;
+					document.getElementById('base').value = e.src;
+					document.getElementById('decodeBaseURL').onchange();
 				})
-				document.getElementById('decodeBaseURL').value = Array.from( document.getElementsByClassName('decodeBase') )[0].src;
-				document.getElementById('decodeBaseURL').onchange();
-			}
-			document.addEventListener('deviceready', ()=>{init()}, false);
+			})
+			document.getElementById('decodeBaseURL').value = Array.from( document.getElementsByClassName('decodeBase') )[0].src;
+			document.getElementById('decodeBaseURL').onchange();
+
+			document.addEventListener('deviceready', ()=>{
+				navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60})
+			}, false);
 		</script>
 	</body>
 </html>
