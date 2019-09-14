@@ -95,7 +95,6 @@
 			</div>
 		</div>
 		<script src="js/qrcode.js" charset="utf-8"></script>
-		<script type="text/javascript" src="cordova.js"></script>
 		<script charset="utf-8">
 			const generate = () => {
 				let text = document.getElementById("text").value;
@@ -168,10 +167,6 @@
 			})
 			document.getElementById('decodeBaseURL').value = Array.from( document.getElementsByClassName('decodeBase') )[0].src;
 			document.getElementById('decodeBaseURL').onchange();
-
-			document.addEventListener('deviceready', ()=>{
-				navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60})
-			}, false);
 		</script>
 	</body>
 </html>
