@@ -19,8 +19,8 @@
 
   <icon src="icon.png" />
 
-  <plugin name="cordova-plugin-camera" source="npm" />
-  <plugin name="org.crosswalk.engine" source="pgb" />
+  <gap:plugin name="cordova-plugin-camera" source="npm" />
+  <gap:plugin name="cordova-plugin-crosswalk-webview-pgb-adapt" source="npm" version="1.4.0-dev-5"/>
   <uses-feature android:name="android.hardware.camera" />
   <uses-feature android:name="android.hardware.camera.autofocus" />
   <uses-permission android:name="android.permission.CAMERA" />
