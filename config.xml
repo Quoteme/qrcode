@@ -19,6 +19,9 @@
 
   <icon src="icon.png" />
 
+  <preference name='phonegap-version' value='cli-7.0.1' />
+  <preference name='pgb-builder-version' value='1' />
+
   <gap:plugin name="cordova-plugin-camera" source="npm" />
   <gap:plugin name="cordova-plugin-crosswalk-webview-pgb-adapt" source="npm" version="1.4.0-dev-5"/>
 </widget>
