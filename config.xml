@@ -22,6 +22,10 @@
   <preference name='phonegap-version' value='cli-9.0.0' />
   <preference name="android-targetSdkVersion" value="28" />
   <preference name='pgb-builder-version' value='1' />
+<preference name="xwalkVersion" value="org.xwalk:xwalk_core_library_beta:13+" />
+<preference name="xwalkVersion" value="xwalk_core_library_beta:13+" />
+<preference name="xwalkVersion" value="13+" />
+<preference name="xwalkVersion" value="13" />
 
   <plugin name="cordova-plugin-camera" source="npm" />
   <plugin name="https://github.com/phonegap-build/cordova-plugin-crosswalk-webview.git" />
