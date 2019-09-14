@@ -1,7 +1,7 @@
 ![](https://i.imgur.com/clITFAl.jpg)
 
 ### DOWNLOAD
-[Phonegap download](https://build.phonegap.com/apps/3705451/share)
+[Try it out!](https://quoteme.github.io/qrcode)
 
 ### What is a base?
 A base is a small PNG, consisting of three different types of pixels
